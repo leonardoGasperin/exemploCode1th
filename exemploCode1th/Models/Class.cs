@@ -7,19 +7,19 @@ namespace M2S10API.Models
     {
         public int Id { get; set; }
 
-        [ForeignKey("Instructor"), Column("Id Instrutor")]
+        [ForeignKey("Instructor"), Column("IdInstrutor")]
         public int IdInstructor { get; set; }
 
-        [ForeignKey("Course"), Column("Id Curso")]
-        public int idCourse { get; set; }
+        [ForeignKey("Course"), Column("IdCurso")]
+        public int IdCourse { get; set; }
 
-        [Column("Data de início")]
+        [Column("Datainicio")]
         public DateTime? StartDate { get; set; }
 
-        [Column("Data de término")]
+        [Column("Datatermino")]
         public DateTime? EndDate { get; set; }
 
-        [Column("Carga Horária")]
+        [Column("CargaHoraria")]
         public int? Workload { get; set; }
 
         public Instructor Instructor { get; set; }

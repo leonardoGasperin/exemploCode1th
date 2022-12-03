@@ -30,8 +30,6 @@ namespace exemploCode1th.Controllers
               return NotFound();
           }
             return await _context.Classes.ToListAsync();
-                /*.Include("instructor")
-                .Include("course")*/
         }
 
         // GET: api/Class/5
@@ -92,7 +90,7 @@ namespace exemploCode1th.Controllers
           {
               return Problem("Entity set 'ExemploApiContext.Classes'  is null.");
           }
-            _context.Classes.Add(@class);
+            _context.Entry(@class).State = EntityState.Added;
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetClass", new { id = @class.Id }, @class);

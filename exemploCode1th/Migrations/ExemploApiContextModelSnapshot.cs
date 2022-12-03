@@ -32,29 +32,29 @@ namespace exemploCode1th.Migrations
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("Data de término");
+                        .HasColumnName("Datatermino");
+
+                    b.Property<int>("IdCourse")
+                        .HasColumnType("int")
+                        .HasColumnName("IdCurso");
 
                     b.Property<int>("IdInstructor")
                         .HasColumnType("int")
-                        .HasColumnName("Id Instrutor");
+                        .HasColumnName("IdInstrutor");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("Data de início");
+                        .HasColumnName("Datainicio");
 
                     b.Property<int?>("Workload")
                         .HasColumnType("int")
-                        .HasColumnName("Carga Horária");
-
-                    b.Property<int>("idCourse")
-                        .HasColumnType("int")
-                        .HasColumnName("Id Curso");
+                        .HasColumnName("CargaHoraria");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdInstructor");
+                    b.HasIndex("IdCourse");
 
-                    b.HasIndex("idCourse");
+                    b.HasIndex("IdInstructor");
 
                     b.ToTable("Turma");
                 });
@@ -84,7 +84,7 @@ namespace exemploCode1th.Migrations
 
                     b.Property<int?>("Workload")
                         .HasColumnType("int")
-                        .HasColumnName("Carga Horária");
+                        .HasColumnName("CargaHoraria");
 
                     b.HasKey("Id");
 
@@ -128,7 +128,7 @@ namespace exemploCode1th.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instructors");
+                    b.ToTable("Instrutor");
                 });
 
             modelBuilder.Entity("M2S10API.Models.Register", b =>
@@ -141,23 +141,23 @@ namespace exemploCode1th.Migrations
 
                     b.Property<int>("IdClass")
                         .HasColumnType("int")
-                        .HasColumnName("Id Turma");
+                        .HasColumnName("IdTurma");
 
-                    b.Property<int>("IdStudant")
+                    b.Property<int>("IdStudent")
                         .HasColumnType("int")
-                        .HasColumnName("Id Aluno");
+                        .HasColumnName("IdAluno");
 
                     b.Property<DateTime?>("RegisterDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("Data Matricula");
+                        .HasColumnName("DataMatricula");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdClass");
 
-                    b.HasIndex("IdStudant");
+                    b.HasIndex("IdStudent");
 
-                    b.ToTable("Matrícula");
+                    b.ToTable("Matricula");
                 });
 
             modelBuilder.Entity("M2S10API.Models.Student", b =>
@@ -170,7 +170,7 @@ namespace exemploCode1th.Migrations
 
                     b.Property<DateTime?>("BornDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("Data de Nascimento");
+                        .HasColumnName("DataNascimento");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
@@ -202,15 +202,15 @@ namespace exemploCode1th.Migrations
 
             modelBuilder.Entity("M2S10API.Models.Class", b =>
                 {
-                    b.HasOne("M2S10API.Models.Instructor", "Instructor")
+                    b.HasOne("M2S10API.Models.Course", "Course")
                         .WithMany()
-                        .HasForeignKey("IdInstructor")
+                        .HasForeignKey("IdCourse")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("M2S10API.Models.Course", "Course")
+                    b.HasOne("M2S10API.Models.Instructor", "Instructor")
                         .WithMany()
-                        .HasForeignKey("idCourse")
+                        .HasForeignKey("IdInstructor")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -229,7 +229,7 @@ namespace exemploCode1th.Migrations
 
                     b.HasOne("M2S10API.Models.Student", "Student")
                         .WithMany()
-                        .HasForeignKey("IdStudant")
+                        .HasForeignKey("IdStudent")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

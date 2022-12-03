@@ -14,7 +14,7 @@ namespace M2S10API.Models
         [StringLength(255), Column("Requisito")]
         public string? Requisite { get; set; }
 
-        [Column("Carga Horária")]
+        [Column("CargaHoraria")]
         public int? Workload { get; set; }
 
         [Column("Valor")]

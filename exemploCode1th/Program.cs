@@ -1,5 +1,6 @@
 using exemploCode1th.Context;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 

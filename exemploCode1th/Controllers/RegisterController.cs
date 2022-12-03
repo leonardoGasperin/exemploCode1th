@@ -90,7 +90,7 @@ namespace exemploCode1th.Controllers
           {
               return Problem("Entity set 'ExemploApiContext.Registers'  is null.");
           }
-            _context.Registers.Add(register);
+            _context.Entry(register).State = EntityState.Added;
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetRegister", new { id = register.Id }, register);

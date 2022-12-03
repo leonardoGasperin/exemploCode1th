@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace exemploCode1th.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateAnExemple : Migration
+    public partial class InitialCreation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace exemploCode1th.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Requisito = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    CargaHorária = table.Column<int>(name: "Carga Horária", type: "int", nullable: true),
+                    CargaHoraria = table.Column<int>(type: "int", nullable: true),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
@@ -37,7 +37,7 @@ namespace exemploCode1th.Migrations
                     Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(name: "E-mail", type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Telefone = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    DatadeNascimento = table.Column<DateTime>(name: "Data de Nascimento", type: "datetime2", nullable: true)
+                    DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -45,7 +45,7 @@ namespace exemploCode1th.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Instructors",
+                name: "Instrutor",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -58,7 +58,7 @@ namespace exemploCode1th.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Instructors", x => x.Id);
+                    table.PrimaryKey("PK_Instrutor", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,50 +67,50 @@ namespace exemploCode1th.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdInstrutor = table.Column<int>(name: "Id Instrutor", type: "int", nullable: false),
-                    IdCurso = table.Column<int>(name: "Id Curso", type: "int", nullable: false),
-                    Datadeinício = table.Column<DateTime>(name: "Data de início", type: "datetime2", nullable: true),
-                    Datadetérmino = table.Column<DateTime>(name: "Data de término", type: "datetime2", nullable: true),
-                    CargaHorária = table.Column<int>(name: "Carga Horária", type: "int", nullable: true)
+                    IdInstrutor = table.Column<int>(type: "int", nullable: false),
+                    IdCurso = table.Column<int>(type: "int", nullable: false),
+                    Datainicio = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Datatermino = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CargaHoraria = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Turma", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Turma_Cursos_Id Curso",
+                        name: "FK_Turma_Cursos_IdCurso",
                         column: x => x.IdCurso,
                         principalTable: "Cursos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Turma_Instructors_Id Instrutor",
+                        name: "FK_Turma_Instrutor_IdInstrutor",
                         column: x => x.IdInstrutor,
-                        principalTable: "Instructors",
+                        principalTable: "Instrutor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Matrícula",
+                name: "Matricula",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdTurma = table.Column<int>(name: "Id Turma", type: "int", nullable: false),
-                    IdAluno = table.Column<int>(name: "Id Aluno", type: "int", nullable: false),
-                    DataMatricula = table.Column<DateTime>(name: "Data Matricula", type: "datetime2", nullable: true)
+                    IdTurma = table.Column<int>(type: "int", nullable: false),
+                    IdAluno = table.Column<int>(type: "int", nullable: false),
+                    DataMatricula = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Matrícula", x => x.Id);
+                    table.PrimaryKey("PK_Matricula", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Matrícula_Estudante_Id Aluno",
+                        name: "FK_Matricula_Estudante_IdAluno",
                         column: x => x.IdAluno,
                         principalTable: "Estudante",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Matrícula_Turma_Id Turma",
+                        name: "FK_Matricula_Turma_IdTurma",
                         column: x => x.IdTurma,
                         principalTable: "Turma",
                         principalColumn: "Id",
@@ -118,31 +118,31 @@ namespace exemploCode1th.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matrícula_Id Aluno",
-                table: "Matrícula",
-                column: "Id Aluno");
+                name: "IX_Matricula_IdAluno",
+                table: "Matricula",
+                column: "IdAluno");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matrícula_Id Turma",
-                table: "Matrícula",
-                column: "Id Turma");
+                name: "IX_Matricula_IdTurma",
+                table: "Matricula",
+                column: "IdTurma");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Turma_Id Curso",
+                name: "IX_Turma_IdCurso",
                 table: "Turma",
-                column: "Id Curso");
+                column: "IdCurso");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Turma_Id Instrutor",
+                name: "IX_Turma_IdInstrutor",
                 table: "Turma",
-                column: "Id Instrutor");
+                column: "IdInstrutor");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Matrícula");
+                name: "Matricula");
 
             migrationBuilder.DropTable(
                 name: "Estudante");
@@ -154,7 +154,7 @@ namespace exemploCode1th.Migrations
                 name: "Cursos");
 
             migrationBuilder.DropTable(
-                name: "Instructors");
+                name: "Instrutor");
         }
     }
 }

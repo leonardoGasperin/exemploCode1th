@@ -20,7 +20,7 @@ namespace M2S10API.Models
         [StringLength(14), Column("Telefone")]
         public string Phone { get; set; }
 
-        [Column("Data de Nascimento")]
+        [Column("DataNascimento")]
         public DateTime? BornDate { get; set; }
     }
 }

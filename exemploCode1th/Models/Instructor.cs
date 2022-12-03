@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace M2S10API.Models
 {
+    [Table("Instrutor")]
     public class Instructor
     {
         public int Id { get; set; }

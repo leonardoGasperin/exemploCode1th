@@ -2,18 +2,18 @@
 
 namespace M2S10API.Models
 {
-    [Table("Matrícula")]
+    [Table("Matricula")]
     public class Register
     {
         public int Id { get; set; }
 
-        [ForeignKey("Class"), Column("Id Turma")]
+        [ForeignKey("Class"), Column("IdTurma")]
         public int IdClass { get; set; }
 
-        [ForeignKey("Student"), Column("Id Aluno")]
-        public int IdStudant { get; set; }
+        [ForeignKey("Student"), Column("IdAluno")]
+        public int IdStudent { get; set; }
 
-        [Column("Data Matricula")]
+        [Column("DataMatricula")]
         public DateTime? RegisterDate { get; set; }
 
         public Class Class { get; set; }
